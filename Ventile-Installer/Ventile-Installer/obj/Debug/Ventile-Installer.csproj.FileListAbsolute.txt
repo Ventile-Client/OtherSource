@@ -1,0 +1,12 @@
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\bin\Debug\Ventile-Installer.exe.config
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\bin\Debug\Ventile-Installer.exe
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\bin\Debug\Ventile-Installer.pdb
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile-Installer.csprojAssemblyReference.cache
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile_Installer.Installer.resources
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile_Installer.Properties.Resources.resources
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile-Installer.csproj.GenerateResource.cache
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile-Installer.csproj.CoreCompileInputs.cache
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile-Installer.exe
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile-Installer.pdb
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Death\source\repos\Ventile-Installer\Ventile-Installer\obj\Debug\Ventile-Installer.csproj.ResolveComReference.cache

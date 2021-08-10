@@ -1,0 +1,12 @@
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csprojAssemblyReference.cache
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile_Updater.Properties.Resources.resources
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile_Updater.Updater.resources
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.GenerateResource.cache
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.CoreCompileInputs.cache
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\bin\Debug\Ventile-Updater.exe.config
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\bin\Debug\Ventile-Updater.exe
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\bin\Debug\Ventile-Updater.pdb
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.exe
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.pdb
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.ResolveComReference.cache
