@@ -1,5 +1,7 @@
 ﻿using IWshRuntimeLibrary;
+using Octokit;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -14,6 +16,16 @@ namespace Ventile_Updater
         {
             InitializeComponent();
         }
+
+        public static LinkSettings linkSettings = new LinkSettings()
+        {
+            DiscordInvite = @"https://discord.gg/T2QtgdrtAY",
+            WebsiteLink = @"https://ventile-client.github.io/Web/",
+            RepoOwner = "Ventile-Client",
+            VersionsRepo = "VersionChanger",
+            DownloadRepo = "Download",
+            GithubProductHeader = "VentileClientUpdater"
+        };
 
         #region InternetTest
 
@@ -76,59 +88,37 @@ namespace Ventile_Updater
 
         #endregion Downloading Code
 
-        #region Shortcut
-
-        public static void CreateShortcut(string shortcutName, string shortcutPath, string targetFileLocation, string iconLoc, string desc)
-        {
-            string shortcutLocation = System.IO.Path.Combine(shortcutPath, shortcutName + ".lnk");
-            WshShell shell = new WshShell();
-            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-
-            shortcut.Description = desc;   // The description of the shortcut
-            shortcut.IconLocation = iconLoc;           // The icon of the shortcut
-            shortcut.TargetPath = targetFileLocation;                 // The path of the file that will launch when the shortcut is run
-            shortcut.Save();
-        }
-
-        #endregion Shortcut
-
-        private void Updater_Load(object sender, EventArgs e)
+        private async void Updater_Load(object sender, EventArgs e)
         {
             //Folders
-            if (!(Directory.Exists(@"C:\temp")))
+            if (Directory.Exists(@"C:\temp\VentileClient\Launcher"))
             {
-                Directory.CreateDirectory(@"C:\temp");
+                Directory.Delete(@"C:\temp\VentileClient\Launcher", true);
             }
 
-            if (Directory.Exists(@"C:\temp\VentileClient"))
-            {
-                Directory.Delete(@"C:\temp\VentileClient", true);
-            }
+            Directory.CreateDirectory(@"C:\temp\VentileClient\Launcher");
 
-            Directory.CreateDirectory(@"C:\temp\VentileClient");
+            GitHubClient github = new GitHubClient(new ProductHeaderValue(linkSettings.GithubProductHeader)); // New Github Client
 
-            Thread.Sleep(100);
+            var releases = await github.Repository.Release.GetAll(linkSettings.RepoOwner, linkSettings.DownloadRepo); // Gets all releases from the VersionChanger repo
 
-            download(@"https://github.com/DeathlyBower959/Ventile-Client-Downloads/blob/main/VentileClient.zip?raw=true", @"C:\temp\VentileClient\", "VentileClient.zip");
-            ZipFile.ExtractToDirectory(@"C:\temp\VentileClient\VentileClient.zip", @"C:\temp\VentileClient");
-            System.IO.File.Delete(@"C:\temp\VentileClient\VentileClient.zip");
+            download(string.Format(@"https://github.com/" + linkSettings.RepoOwner + "/" + linkSettings.DownloadRepo + "/releases/download/{0}/{1}", releases[0].TagName, "VentileClient.zip"), @"C:\temp\VentileClient\Launcher", "VentileClient.zip");
+            ZipFile.ExtractToDirectory(@"C:\temp\VentileClient\Launcher\VentileClient.zip", @"C:\temp\VentileClient\Launcher");
+            System.IO.File.Delete(@"C:\temp\VentileClient\Launcher\VentileClient.zip");
 
-            //Shortcuts
-            var desk = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var start = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
-
-            if (System.IO.File.Exists(desk + @"\Ventile Client.lnk")) {
-                System.IO.File.Delete(desk + @"\Ventile Client.lnk");
-            }
-
-            if (System.IO.File.Exists(start + @"\Ventile Client.lnk")) {
-                System.IO.File.Delete(start + @"\Ventile Client.lnk");
-            }
-
-            CreateShortcut("Ventile Client", desk, @"C:\temp\VentileClient\VentileClient.exe\", @"C:\temp\VentileClient\transparent_logo_white.ico", "Ventile Client Launcher for MCBE");
-            CreateShortcut("Ventile Client", start, @"C:\temp\VentileClient\VentileClient.exe\", @"C:\temp\VentileClient\transparent_logo_white.ico", "Ventile Client Launcher for MCBE");
+            Process.Start(@"C:\temp\VentileClient\Launcher\VentileClient.exe");
 
             this.Close();
         }
+    }
+    public class LinkSettings
+    {
+        public string RepoOwner;
+        public string DownloadRepo;
+        public string VersionsRepo;
+
+        public string WebsiteLink;
+        public string DiscordInvite;
+        public string GithubProductHeader;
     }
 }

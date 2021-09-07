@@ -1,4 +1,3 @@
-C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csprojAssemblyReference.cache
 C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile_Updater.Properties.Resources.resources
 C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile_Updater.Updater.resources
 C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.GenerateResource.cache
@@ -10,3 +9,20 @@ C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Up
 C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.pdb
 C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.ResolveComReference.cache
+C:\Users\Death\source\repos\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.AssemblyReference.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\bin\Debug\Ventile-Updater.exe.config
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\bin\Debug\Ventile-Updater.exe
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\bin\Debug\Ventile-Updater.pdb
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.AssemblyReference.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.ResolveComReference.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile_Updater.Properties.Resources.resources
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile_Updater.Updater.resources
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.GenerateResource.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.CoreCompileInputs.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.exe
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.pdb
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\bin\Debug\Octokit.xml
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.Fody.CopyLocal.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Updater\Ventile-Updater\obj\Debug\Ventile-Updater.csproj.CopyComplete
