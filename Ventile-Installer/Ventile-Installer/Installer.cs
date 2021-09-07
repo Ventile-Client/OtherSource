@@ -1,35 +1,36 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
-
-/*INSTRUCTIONS\\
-
- - When creating a new version, upload all cosmetic.zip files to release.
- - Upload aboutInfo.txt in a release that contains:
-
-    launcherVersion
-    textureVersion
-    clientVersion
-
- - Upload individual stuff in bin\x64\Debug or Release to the main github page
- - Upload VentileClient.lnk to main github page
-
- - Change the version in Ventile.settings
-
-*/
+using Octokit;
 
 namespace Ventile_Installer
 {
+    
     public partial class Installer : Form
     {
         public Installer()
         {
             InitializeComponent();
         }
+
+        GitHubClient github = new GitHubClient(new ProductHeaderValue(linkSettings.GithubProductHeader)); // New Github Client
+
+        public static LinkSettings linkSettings = new LinkSettings()
+        {
+            DiscordInvite = @"https://discord.gg/T2QtgdrtAY",
+            WebsiteLink = @"https://ventile-client.github.io/Web/",
+            RepoOwner = "Ventile-Client",
+            VersionsRepo = "VersionChanger",
+            DownloadRepo = "Download",
+            GithubProductHeader = "VentileClientInstaller"
+        };
 
         //Fade
 
@@ -47,40 +48,17 @@ namespace Ventile_Installer
             if (Opacity <= 0)
             {
                 fadeOut.Stop();
+                try
+                {
+                    Process.Start(@"C:\temp\VentileClient\Launcher\VentileClient.exe");
+                }
+                catch
+                {
+
+                }
                 this.Close();
             }
             Opacity -= 0.04;
-        }
-
-        //Move Window
-
-        private int mouseX = 0;
-        private int mouseY = 0;
-        private int mouseinX = 0;
-        private int mouseinY = 0;
-        private bool mouseDown;
-
-        private void topPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            mouseinX = MousePosition.X - Bounds.X;
-            mouseinY = MousePosition.Y - Bounds.Y;
-        }
-
-        private void topPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                mouseX = MousePosition.X - mouseinX;
-                mouseY = MousePosition.Y - mouseinY;
-
-                this.SetDesktopLocation(mouseX, mouseY);
-            }
-        }
-
-        private void topPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
         }
 
         private void close_Click(object sender, EventArgs e)
@@ -176,7 +154,9 @@ namespace Ventile_Installer
             try
             {
                 button1.Visible = false;
+                label1.Text = "Installing...";
                 label1.Visible = true;
+                button2.Visible = false;  
 
                 //Folders
                 if (!(Directory.Exists(@"C:\temp")))
@@ -184,24 +164,47 @@ namespace Ventile_Installer
                     Directory.CreateDirectory(@"C:\temp");
                 }
 
-                if (Directory.Exists(@"C:\temp\VentileClient"))
+                if (!Directory.Exists(@"C:\temp\VentileClient"))
                 {
-                    Directory.Delete(@"C:\temp\VentileClient", true);
+                    Directory.CreateDirectory(@"C:\temp\VentileClient");
                 }
 
-                Directory.CreateDirectory(@"C:\temp\VentileClient");
+                if (!Directory.Exists(@"C:\temp\VentileClient\Presets"))
+                {
+                    Directory.CreateDirectory(@"C:\temp\VentileClient\Presets");
+                }
 
-                Thread.Sleep(100);
+                if (Directory.Exists(@"C:\temp\VentileClient\Launcher"))
+                {
+                    Directory.Delete(@"C:\temp\VentileClient\Launcher", true);
+                }
 
-                download(@"https://github.com/DeathlyBower959/Ventile-Client-Downloads/blob/main/VentileClient.zip?raw=true", @"C:\temp\VentileClient\", "VentileClient.zip");
-                download(@"https://github.com/DeathlyBower959/Ventile-Client-Downloads/blob/main/Ventile-Updater.exe?raw=true", @"C:\temp\", "Ventile-Updater.exe");
+                if (System.IO.File.Exists(@"C:\temp\VentileClient\Ventile-Updater.exe"))
+                {
+                    System.IO.File.Delete(@"C:\temp\VentileClient\Ventile-Updater.exe");
+                }
 
-                Thread.Sleep(50);
+                Directory.CreateDirectory(@"C:\temp\VentileClient\Launcher");
 
-                ZipFile.ExtractToDirectory(@"C:\temp\VentileClient\VentileClient.zip", @"C:\temp\VentileClient");
-                System.IO.File.Delete(@"C:\temp\VentileClient\VentileClient.zip");
+                int index = 0;
+                foreach (Release release in releases)
+                {
+                    if (release.TagName == selectedRelease.Text)
+                    {
+                        break;
+                    }
+                    index++;
+                }
 
-                Thread.Sleep(50);
+                download(string.Format(@"https://github.com/" + linkSettings.RepoOwner + "/" + linkSettings.DownloadRepo + "/releases/download/{0}/{1}", releases[index].TagName, "VentileClient.zip"), @"C:\temp\VentileClient\Launcher", "VentileClient.zip");
+                download(@"https://github.com/" + linkSettings.RepoOwner + "/" + linkSettings.DownloadRepo + "/blob/main/Ventile-Updater.exe?raw=true", @"C:\temp\VentileClient", "Ventile-Updater.exe");
+                download(string.Format(@"https://github.com/" + linkSettings.RepoOwner + "/" + linkSettings.DownloadRepo + "/releases/download/{0}/{1}", releases[index].TagName, "Presets.zip"), @"C:\temp\VentileClient\Presets", "Presets.zip");
+
+                ZipFile.ExtractToDirectory(@"C:\temp\VentileClient\Launcher\VentileClient.zip", @"C:\temp\VentileClient\Launcher");
+                System.IO.File.Delete(@"C:\temp\VentileClient\Launcher\VentileClient.zip");
+
+                ZipFile.ExtractToDirectory(@"C:\temp\VentileClient\Presets\Presets.zip", @"C:\temp\VentileClient\Presets");
+                System.IO.File.Delete(@"C:\temp\VentileClient\Presets\Presets.zip");
 
                 //Shortcuts
                 var desk = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -217,8 +220,8 @@ namespace Ventile_Installer
                     System.IO.File.Delete(start + @"\Ventile Client.lnk");
                 }
 
-                CreateShortcut("Ventile Client", desk, @"C:\temp\VentileClient\VentileClient.exe\", @"C:\temp\VentileClient\transparent_logo_white.ico", "Ventile Client Launcher for MCBE");
-                CreateShortcut("Ventile Client", start, @"C:\temp\VentileClient\VentileClient.exe\", @"C:\temp\VentileClient\transparent_logo_white.ico", "Ventile Client Launcher for MCBE");
+                CreateShortcut("Ventile Client", desk, @"C:\temp\VentileClient\Launcher\VentileClient.exe\", @"C:\temp\VentileClient\Launcher\transparent_logo_white.ico", "Ventile Client Launcher for MCBE");
+                CreateShortcut("Ventile Client", start, @"C:\temp\VentileClient\Launcher\VentileClient.exe\", @"C:\temp\VentileClient\Launcher\transparent_logo_white.ico", "Ventile Client Launcher for MCBE");
 
                 label1.Visible = false;
                 button2.Visible = true;
@@ -237,6 +240,9 @@ namespace Ventile_Installer
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Visible = false;
+            label1.Text = "Uninstalling...";
+            label1.Visible = true;
+            button1.Visible = false;
 
             var desk = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var start = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
@@ -244,11 +250,6 @@ namespace Ventile_Installer
             if (Directory.Exists(@"C:\temp\VentileClient\"))
             {
                 Directory.Delete(@"C:\temp\VentileClient\", true);
-            }
-
-            if (System.IO.File.Exists(@"C:\temp\Ventile-Updater.exe"))
-            {
-                System.IO.File.Delete(@"C:\temp\Ventile-Updater.exe");
             }
 
             if (System.IO.File.Exists(start + @"\Ventile Client.lnk"))
@@ -261,14 +262,21 @@ namespace Ventile_Installer
             }
 
             button1.Visible = true;
-            label1.Visible = true;
+            label1.Visible = false;
+            selectedRelease.Visible = true;
             Properties.Settings.Default.Installed = false;
         }
 
-        private void Installer_Load(object sender, EventArgs e)
+        System.Collections.Generic.IReadOnlyList<Release> releases;
+
+        private async void Installer_Load(object sender, EventArgs e)
         {
+            releases = await github.Repository.Release.GetAll(linkSettings.RepoOwner, linkSettings.DownloadRepo); // Gets all releases from the VersionChanger repo
+
+            selectedRelease.Text = releases[0].TagName;
+
             bool internet = InternetCheck();
-            
+
             if (!internet)
             {
                 var msg = MessageBox.Show("No active connection", "Connection Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
@@ -276,18 +284,14 @@ namespace Ventile_Installer
                 {
                     retry();
                     return;
-                } else
+                }
+                else
                 {
                     fadeOut.Start();
                 }
             }
 
-            if (!(Directory.Exists(@"C:\temp")))
-            {
-                Directory.CreateDirectory(@"C:\temp");
-            }
-
-            if (System.IO.File.Exists(@"C:\temp\VentileClient\VentileClient.exe"))
+            if (System.IO.File.Exists(@"C:\temp\VentileClient\Launcher\VentileClient.exe"))
             {
                 Properties.Settings.Default.Installed = true;
             }
@@ -301,13 +305,30 @@ namespace Ventile_Installer
                 button1.Visible = false;
                 button2.Visible = true;
                 label1.Visible = false;
+                selectedRelease.Visible = false;
             }
             else
             {
                 button1.Visible = true;
                 button2.Visible = false;
                 label1.Visible = true;
+                selectedRelease.Visible = true;
             }
+
+            foreach (Release release in releases)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem();
+                item.Click += VersionChanged;
+                item.Name = release.TagName;
+                item.Text = item.Name;
+
+                versionSelector.Items.Add(item);
+            }
+        }
+
+        private void VersionChanged(object sender, EventArgs e)
+        {
+            selectedRelease.Text = ((ToolStripMenuItem)sender).Name;
         }
 
         private void retry()
@@ -328,12 +349,7 @@ namespace Ventile_Installer
                 }
             }
 
-            if (!(Directory.Exists(@"C:\temp")))
-            {
-                Directory.CreateDirectory(@"C:\temp");
-            }
-
-            if (System.IO.File.Exists(@"C:\temp\VentileClient\VentileClient.exe"))
+            if (System.IO.File.Exists(@"C:\temp\VentileClient\Launcher\VentileClient.exe"))
             {
                 Properties.Settings.Default.Installed = true;
             }
@@ -355,5 +371,16 @@ namespace Ventile_Installer
                 label1.Visible = true;
             }
         }
+    }
+
+    public class LinkSettings
+    {
+        public string RepoOwner;
+        public string DownloadRepo;
+        public string VersionsRepo;
+
+        public string WebsiteLink;
+        public string DiscordInvite;
+        public string GithubProductHeader;
     }
 }

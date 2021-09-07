@@ -38,8 +38,11 @@ namespace Ventile_Installer
             this.fadeOut = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.versionSelector = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.selectedRelease = new System.Windows.Forms.Label();
+            this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -54,9 +57,6 @@ namespace Ventile_Installer
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(800, 27);
             this.topPanel.TabIndex = 2;
-            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
-            this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
-            this.topPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseUp);
             // 
             // minus
             // 
@@ -126,6 +126,7 @@ namespace Ventile_Installer
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.button1.ContextMenuStrip = this.versionSelector;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.button1.FlatAppearance.BorderSize = 4;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -138,6 +139,21 @@ namespace Ventile_Installer
             this.button1.Text = "Install";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // versionSelector
+            // 
+            this.versionSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.versionSelector.Name = "versionSelector";
+            this.versionSelector.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.versionSelector.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
+            this.versionSelector.RenderStyle.ColorTable = null;
+            this.versionSelector.RenderStyle.RoundedEdges = true;
+            this.versionSelector.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
+            this.versionSelector.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.versionSelector.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.versionSelector.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
+            this.versionSelector.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.versionSelector.Size = new System.Drawing.Size(61, 4);
             // 
             // button2
             // 
@@ -166,12 +182,28 @@ namespace Ventile_Installer
             this.label1.TabIndex = 6;
             this.label1.Text = "Installing...";
             // 
+            // selectedRelease
+            // 
+            this.selectedRelease.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectedRelease.ForeColor = System.Drawing.Color.White;
+            this.selectedRelease.Location = new System.Drawing.Point(272, 337);
+            this.selectedRelease.Name = "selectedRelease";
+            this.selectedRelease.Size = new System.Drawing.Size(245, 35);
+            this.selectedRelease.TabIndex = 7;
+            this.selectedRelease.Text = "SelectedVersion";
+            this.selectedRelease.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guna2DragControl1
+            // 
+            this.guna2DragControl1.TargetControl = this.topPanel;
+            // 
             // Installer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.selectedRelease);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -202,6 +234,9 @@ namespace Ventile_Installer
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label selectedRelease;
+        private Guna.UI2.WinForms.Guna2ContextMenuStrip versionSelector;
+        private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
     }
 }
 

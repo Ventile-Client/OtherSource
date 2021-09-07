@@ -1,0 +1,16 @@
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\bin\Release\Ventile-Installer.exe.config
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\bin\Release\Ventile-Installer.exe
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\bin\Release\Ventile-Installer.pdb
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\bin\Release\Octokit.xml
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\bin\Release\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.csproj.AssemblyReference.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Interop.IWshRuntimeLibrary.dll
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.csproj.ResolveComReference.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile_Installer.Installer.resources
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile_Installer.Properties.Resources.resources
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.csproj.GenerateResource.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.csproj.CoreCompileInputs.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.csproj.Fody.CopyLocal.cache
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.csproj.CopyComplete
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.exe
+C:\Users\Death\source\repos\_VENTILE\Ventile-Installer\Ventile-Installer\obj\Release\Ventile-Installer.pdb
